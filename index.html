@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ROG STORE | Gaming Laptops, Monitors, TVs, Phones and Graphics Cards</title>
+<meta name="description" content="ROG STORE: gaming laptops, gaming monitors, televisions, gaming smartphones and graphics cards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E1013; --surface:#17191E; --ink:#EDEDED; --muted:#9AA0A6; --line:#262A31;
+  --accent:#D4A24C; --accent-ink:#0E1013; --alert:#E06C5A; --ph:#1C1F25;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px;
+  --radius:4px;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:150px}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:100%;object-fit:contain}
+svg{display:block}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+[hidden]{display:none!important}
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--s6)}
+.icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.icon.sm{width:18px;height:18px}
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.sec{padding:var(--s12) 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s8);flex-wrap:wrap}
+.sec-head h2{font-size:clamp(26px,3vw,34px);line-height:1.15}
+.sec-head p{color:var(--muted);font-size:15px;margin-top:var(--s2)}
+.link{display:inline-flex;align-items:center;gap:var(--s2);font-weight:500;border-bottom:1px solid currentColor;padding-bottom:2px;color:var(--ink)}
+.link:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);height:48px;padding:0 var(--s6);background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);border-radius:var(--radius);font-weight:500;transition:background .2s,border-color .2s}
+.btn:hover{background:var(--ink);border-color:var(--ink)}
+.btn:disabled{background:var(--line);border-color:var(--line);color:var(--muted);cursor:not-allowed}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Top bar and header */
+.topbar{background:var(--surface);color:var(--muted);font-size:13px;border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:var(--s4);height:40px;flex-wrap:wrap}
+.topbar a:hover{color:var(--accent)}
+.header{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid transparent;transition:box-shadow .25s,border-color .25s}
+.header.scrolled{border-bottom-color:var(--line);box-shadow:0 2px 14px rgba(0,0,0,.45)}
+.header .row{display:flex;align-items:center;gap:var(--s6);height:72px}
+.logo{font-family:var(--serif);font-size:24px;letter-spacing:.02em;white-space:nowrap}
+.logo b{font-weight:500;color:var(--accent)}
+.nav{display:flex;gap:var(--s6);overflow-x:auto;scrollbar-width:none;flex:1;padding:var(--s2) 0}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-size:15px;white-space:nowrap;color:var(--muted);transition:color .2s}
+.nav a:hover,.nav a[aria-current="true"]{color:var(--ink)}
+.search input{width:220px;height:42px;border:1px solid var(--line);background:var(--bg);border-radius:var(--radius);padding:0 var(--s4);font-size:15px;outline:none}
+.search input:focus{border-color:var(--accent)}
+.search input::placeholder{color:var(--muted)}
+.cart{position:relative;display:grid;place-items:center;width:44px;height:44px;flex:none}
+.cart .count{position:absolute;top:2px;right:0;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-size:12px;font-weight:600;display:grid;place-items:center}
+
+/* Hero */
+.hero{padding:var(--s16) 0 var(--s12)}
+.hero h1{font-size:clamp(44px,6vw,76px);line-height:1.02;margin-bottom:var(--s6)}
+.hero p.lead{font-size:18px;color:var(--muted);max-width:52ch;margin-bottom:var(--s8)}
+.hero .actions{display:flex;align-items:center;gap:var(--s6);flex-wrap:wrap}
+
+/* Category tiles */
+.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s4)}
+.cat{display:flex;flex-direction:column;gap:var(--s3);padding:var(--s6);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);transition:border-color .2s}
+.cat:hover,.cat:focus-visible{border-color:var(--muted)}
+.cat .icon{color:var(--muted);width:28px;height:28px}
+.cat strong{font-weight:600;font-size:16px}
+.cat small{color:var(--muted);font-size:14px}
+
+/* Product cards */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s6)}
+.card{display:flex;flex-direction:column;gap:var(--s2);min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:var(--s4)}
+.card .ph{aspect-ratio:4/3;background:var(--ph);border-radius:2px;position:relative;overflow:hidden;display:grid;place-items:center;color:var(--muted);font-size:12px;text-align:center;padding:var(--s4)}
+.card .ph img{position:absolute;inset:0}
+.card .badge{position:absolute;top:var(--s2);left:var(--s2);background:var(--surface);border:1px solid var(--line);font-size:12px;padding:2px 8px;border-radius:2px}
+.card .badge.sale{color:var(--alert);border-color:var(--alert)}
+.card .brand{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:var(--s2)}
+.card h3{font-size:16px;font-weight:600;line-height:1.3}
+.card .spec{font-size:14px;color:var(--muted)}
+.price{display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap;margin-top:auto}
+.price .now{font-weight:600;font-size:17px;color:var(--accent)}
+.price .was{font-size:14px;color:var(--muted);text-decoration:line-through}
+.stock{font-size:13px;color:var(--ink)}
+.stock.low{color:var(--alert)}
+.add{height:42px;border:1px solid var(--line);border-radius:var(--radius);font-weight:500;color:var(--ink);transition:border-color .2s,color .2s}
+.add:hover{border-color:var(--accent);color:var(--accent)}
+.add:disabled{color:var(--muted);cursor:not-allowed}
+.add:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.viewmore{display:flex;justify-content:center;margin-top:var(--s8)}
+
+/* Category pages */
+.back{display:inline-flex;align-items:center;gap:var(--s2);color:var(--muted);font-size:15px;margin:var(--s8) 0 var(--s6)}
+.back:hover{color:var(--accent)}
+.view-head{padding-bottom:var(--s8);border-bottom:1px solid var(--line);margin-bottom:var(--s8)}
+.view-head h1{font-size:clamp(36px,4.5vw,56px);line-height:1.1;margin:var(--s2) 0 var(--s3)}
+.view-head p{color:var(--muted);max-width:60ch}
+.note{font-size:13px;color:var(--muted);margin-top:var(--s8)}
+
+/* Trust and newsletter */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:var(--s8) 0}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s6)}
+.trust .item{display:flex;gap:var(--s4);align-items:flex-start}
+.trust .icon{color:var(--ink);margin-top:2px}
+.trust strong{display:block;font-weight:600;font-size:15px}
+.trust span{font-size:14px;color:var(--muted)}
+.news{padding:var(--s16) 0}
+.news .wrap{display:grid;grid-template-columns:1fr 1fr;gap:var(--s12);align-items:end}
+.news h2{font-size:clamp(28px,3vw,36px);line-height:1.15;margin:var(--s2) 0 var(--s3)}
+.news p{color:var(--muted);max-width:44ch}
+.news form{display:flex;gap:var(--s2);flex-wrap:wrap}
+.news input{flex:1 1 240px;height:50px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:0 var(--s4);font-size:16px;outline:none}
+.news input:focus{border-color:var(--accent)}
+.news input::placeholder{color:var(--muted)}
+.news .msg{flex-basis:100%;font-size:14px;color:var(--ink);min-height:20px}
+
+/* Footer */
+footer{background:var(--surface);border-top:1px solid var(--line);color:var(--muted);padding:var(--s16) 0 var(--s8);font-size:15px}
+.foot{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:var(--s8)}
+.foot .logo{color:var(--ink);font-size:26px}
+.foot h4{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);font-weight:500;margin-bottom:var(--s4)}
+.foot ul{list-style:none;display:grid;gap:var(--s3)}
+.foot a:hover{color:var(--accent)}
+.foot .contact{display:grid;gap:var(--s3);margin-top:var(--s4)}
+.foot .contact span{font-size:13px}
+.foot .contact a{color:var(--ink);font-size:17px;font-weight:500}
+.legal{margin-top:var(--s12);padding-top:var(--s6);border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;font-size:13px}
+
+/* Responsive */
+@media (max-width:1100px){
+  .cats{grid-template-columns:repeat(3,1fr)}
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .search input{width:160px}
+}
+@media (max-width:860px){
+  .news .wrap{grid-template-columns:1fr;gap:var(--s8)}
+  .foot{grid-template-columns:1fr 1fr}
+  .foot > div:first-child{grid-column:1/-1}
+  .trust .wrap{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .wrap{padding:0 var(--s4)}
+  .topbar .wrap{justify-content:center;padding:var(--s2) 0;height:auto}
+  .header .row{height:auto;flex-wrap:wrap;gap:var(--s3);padding:var(--s3) 0}
+  .logo{order:1}
+  .cart{order:2;margin-left:auto}
+  .search{order:3;width:100%}
+  .search input{width:100%}
+  .nav{order:4;width:100%;gap:var(--s4);margin:0 calc(var(--s4) * -1);padding:0 var(--s4) var(--s2)}
+  .hero{padding:var(--s8) 0 var(--s12)}
+  .hero .actions .btn{width:100%}
+  .sec{padding:var(--s8) 0}
+  .cats{grid-template-columns:1fr 1fr}
+  .cat{padding:var(--s4)}
+  .grid4{grid-template-columns:1fr;gap:var(--s4)}
+  .foot{grid-template-columns:1fr}
+  .news form .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1"/><path d="M2 19h20"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="13" rx="1"/><path d="M12 16v4M8 21h8"/></symbol>
+    <symbol id="i-tv" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="12" rx="1"/><path d="M8 21h8M9 2l3 3 3-3"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-gpu" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="1"/><circle cx="7.5" cy="12" r="2.5"/><circle cx="16.5" cy="12" r="2.5"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.5 11h11L21 7H6"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M1 6h12v10H1zM13 10h5l3 3v3h-8"/><circle cx="5" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+    <symbol id="i-return" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-2 5 2-2-7"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+  </defs>
+</svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Free delivery on orders above ₹999</span>
+    <span>
+      WhatsApp: <a href="https://wa.me/919665687711" target="_blank" rel="noopener">+91 96656 87711</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:kiran.aditya2014@gmail.com">kiran.aditya2014@gmail.com</a>
+    </span>
+  </div>
+</div>
+
+<header class="header" id="header">
+  <div class="wrap row">
+    <a href="#top" class="logo" aria-label="ROG STORE home">ROG <b>STORE</b></a>
+    <nav class="nav" aria-label="Product categories">
+      <a href="#sec-laptops" data-nav="laptops">Gaming laptops</a>
+      <a href="#sec-monitors" data-nav="monitors">Gaming monitors</a>
+      <a href="#sec-tvs" data-nav="tvs">Televisions</a>
+      <a href="#sec-phones" data-nav="phones">Gaming smartphones</a>
+      <a href="#sec-gpus" data-nav="gpus">Graphics cards</a>
+    </nav>
+    <label class="search"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Search products</span>
+      <input type="search" placeholder="Search products">
+    </label>
+    <a href="#cart" class="cart" aria-label="Cart, 0 items">
+      <svg class="icon"><use href="#i-cart"/></svg>
+      <span class="count" id="cartCount">0</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div id="home">
+    <section class="hero" id="top">
+      <div class="wrap">
+        <h1 class="serif">Gaming hardware, chosen for real performance.</h1>
+        <p class="lead">Laptops, monitors, televisions, phones and graphics cards from the brands serious players and home cinema buyers actually use.</p>
+        <div class="actions">
+          <a href="#sec-laptops" class="btn">Shop gaming laptops <svg class="icon sm"><use href="#i-arrow"/></svg></a>
+          <a href="#sec-gpus" class="link">Browse graphics cards</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:0;border-top:0">
+      <div class="wrap">
+        <div class="cats">
+          <a class="cat" href="#sec-laptops"><svg class="icon"><use href="#i-laptop"/></svg><strong>Gaming laptops</strong><small>High refresh and RTX graphics</small></a>
+          <a class="cat" href="#sec-monitors"><svg class="icon"><use href="#i-monitor"/></svg><strong>Gaming monitors</strong><small>120Hz to 480Hz panels</small></a>
+          <a class="cat" href="#sec-tvs"><svg class="icon"><use href="#i-tv"/></svg><strong>Televisions</strong><small>OLED and QLED with 120Hz</small></a>
+          <a class="cat" href="#sec-phones"><svg class="icon"><use href="#i-phone"/></svg><strong>Gaming smartphones</strong><small>Cooling, triggers, high refresh</small></a>
+          <a class="cat" href="#sec-gpus"><svg class="icon"><use href="#i-gpu"/></svg><strong>Graphics cards</strong><small>NVIDIA and AMD</small></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="sec-laptops"><div class="wrap">
+      <div class="sec-head"><div><h2 class="serif">Gaming laptops</h2><p>Leading brands, with GPU and display options at each price point.</p></div><a class="link" href="#/laptops">View more</a></div>
+      <div class="grid4" data-cat="laptops" data-limit="4"></div>
+    </div></section>
+
+    <section class="sec" id="sec-monitors"><div class="wrap">
+      <div class="sec-head"><div><h2 class="serif">Gaming monitors</h2><p>Refresh rate, panel type and adaptive sync for competitive and cinematic play.</p></div><a class="link" href="#/monitors">View more</a></div>
+      <div class="grid4" data-cat="monitors" data-limit="4"></div>
+    </div></section>
+
+    <section class="sec" id="sec-tvs"><div class="wrap">
+      <div class="sec-head"><div><h2 class="serif">Televisions</h2><p>OLED and QLED sets with 120Hz panels and HDMI 2.1 for consoles.</p></div><a class="link" href="#/tvs">View more</a></div>
+      <div class="grid4" data-cat="tvs" data-limit="4"></div>
+    </div></section>
+
+    <section class="sec" id="sec-phones"><div class="wrap">
+      <div class="sec-head"><div><h2 class="serif">Gaming smartphones</h2><p>High refresh displays, active cooling and dedicated gaming controls.</p></div><a class="link" href="#/phones">View more</a></div>
+      <div class="grid4" data-cat="phones" data-limit="4"></div>
+    </div></section>
+
+    <section class="sec" id="sec-gpus"><div class="wrap">
+      <div class="sec-head"><div><h2 class="serif">Graphics cards</h2><p>NVIDIA and AMD desktop cards for gaming, streaming and rendering.</p></div><a class="link" href="#/gpus">View more</a></div>
+      <div class="grid4" data-cat="gpus" data-limit="4"></div>
+    </div></section>
+
+    <section class="trust" aria-label="Store promises">
+      <div class="wrap">
+        <div class="item"><svg class="icon"><use href="#i-truck"/></svg><div><strong>Free delivery</strong><span>On orders above ₹999</span></div></div>
+        <div class="item"><svg class="icon"><use href="#i-return"/></svg><div><strong>Easy returns</strong><span>7-day returns on most items</span></div></div>
+        <div class="item"><svg class="icon"><use href="#i-badge"/></svg><div><strong>Warranty included</strong><span>Manufacturer warranty on every device</span></div></div>
+        <div class="item"><svg class="icon"><use href="#i-lock"/></svg><div><strong>Secure payments</strong><span>Encrypted checkout, cards and UPI</span></div></div>
+      </div>
+    </section>
+
+    <section class="news" id="newsletter"><div class="wrap">
+      <div>
+        <span class="eyebrow">Newsletter</span>
+        <h2 class="serif">Launch dates and price drops.</h2>
+        <p>New releases and price changes on the categories you choose. You can unsubscribe at any time.</p>
+      </div>
+      <form id="newsForm" novalidate>
+        <label style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)" for="email">Email address</label>
+        <input type="email" id="email" placeholder="Your email address" required>
+        <button class="btn" type="submit">Subscribe</button>
+        <p class="msg" id="newsMsg" role="status"></p>
+      </form>
+    </div></section>
+  </div>
+
+  <div id="view" hidden></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#top" class="logo">ROG <b>STORE</b></a>
+        <div class="contact">
+          <span>Call or message on WhatsApp</span>
+          <a href="https://wa.me/919665687711" target="_blank" rel="noopener">+91 96656 87711</a>
+          <span>Email</span>
+          <a href="mailto:kiran.aditya2014@gmail.com">kiran.aditya2014@gmail.com</a>
+        </div>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#sec-laptops">Gaming laptops</a></li>
+          <li><a href="#sec-monitors">Gaming monitors</a></li>
+          <li><a href="#sec-tvs">Televisions</a></li>
+          <li><a href="#sec-phones">Gaming smartphones</a></li>
+          <li><a href="#sec-gpus">Graphics cards</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="https://wa.me/919665687711" target="_blank" rel="noopener">WhatsApp support</a></li>
+          <li><a href="mailto:kiran.aditya2014@gmail.com">Email support</a></li>
+          <li><a href="#">Track an order</a></li>
+          <li><a href="#">Warranty claims</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Terms of sale</a></li>
+          <li><a href="#">Shipping policy</a></li>
+          <li><a href="#">Refund policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 ROG STORE. All rights reserved.</span>
+      <span>Prices in Indian Rupees (₹), inclusive of applicable taxes.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var WA = 'https://wa.me/919665687711';
+  var CATS = {
+    laptops:  { title: 'Gaming laptops', intro: 'Gaming laptops from leading brands, with GPU, display and memory options at each price point.', items: [
+      { brand: 'ASUS ROG', name: 'ROG Strix G16', img: 'images/rog-strix-g16.webp', spec: '16-inch QHD 240Hz, RTX 4070, 16GB RAM', price: 149990, was: 164990, stock: 'In stock' },
+      { brand: 'Lenovo Legion', name: 'Legion Pro 5i', img: 'images/legion-pro-5i.webp', spec: 'Core i7-14650HX, RTX 5060, 16-inch', price: 139990, was: null, stock: 'Few left' },
+      { brand: 'MSI', name: 'Katana 15', img: 'images/katana-15.webp', spec: '15.6-inch 165Hz, RTX 5050', price: 96990, was: 104990, stock: 'In stock' },
+      { brand: 'Acer Predator', name: 'Helios Neo 16', img: 'images/helios-neo-16.webp', spec: '16-inch QHD 165Hz, RTX 4060, 16GB RAM', price: 98990, was: null, stock: 'In stock' },
+      { brand: 'Alienware', name: 'm16 R2', spec: '16-inch QHD+ 240Hz, RTX 4070, 16GB RAM', price: 169990, was: 179990, stock: 'Few left' },
+      { brand: 'HP Omen', name: 'Omen 16', spec: '16-inch QHD 165Hz, RTX 4060, 16GB RAM', price: 112990, was: 121990, stock: 'In stock' }
+    ]},
+    monitors: { title: 'Gaming monitors', intro: 'Refresh rate, panel type and adaptive sync for competitive and cinematic play.', items: [
+      { brand: 'ASUS ROG', name: 'Swift PG27AQN', img: 'images/swift-pg27aqn.webp', spec: '27-inch QHD 360Hz, IPS panel', price: 74990, was: 84990, stock: 'In stock' },
+      { brand: 'Samsung Odyssey', name: 'G5 G50D', img: 'images/g5-g50d.webp', spec: '27-inch QHD 165Hz, 1ms, FreeSync', price: 16990, was: 21990, stock: 'In stock' },
+      { brand: 'LG UltraGear', name: '27GP850', img: 'images/27gp850.webp', spec: '27-inch QHD 200Hz, FreeSync and G-Sync', price: 21990, was: null, stock: 'Few left' },
+      { brand: 'MSI', name: 'MAG 274QRF', img: 'images/mag-274qrf.webp', spec: '27-inch QHD 240Hz, Rapid IPS', price: 18990, was: 22990, stock: 'In stock' }
+    ]},
+    tvs: { title: 'Televisions', intro: 'OLED and QLED televisions with 120Hz panels and HDMI 2.1 for current consoles.', items: [
+      { brand: 'LG', name: 'C4 OLED 55-inch', img: 'images/c4-oled-55-inch.webp', spec: '4K OLED, 120Hz, HDMI 2.1, Game Optimiser', price: 124990, was: 149990, stock: 'In stock' },
+      { brand: 'Samsung', name: 'S90D OLED 55-inch', img: 'images/s90d-oled-55-inch.webp', spec: '4K QD-OLED, 144Hz, HDMI 2.1', price: 139990, was: null, stock: 'In stock' },
+      { brand: 'Sony', name: 'Bravia 8 55-inch', img: 'images/bravia-8-55-inch.webp', spec: '55-inch 4K XR OLED, Google TV, Dolby Vision', price: 169990, was: 184990, stock: 'Few left' },
+      { brand: 'TCL', name: 'QM8K 65-inch', img: 'images/qm8k-65-inch.webp', spec: '4K QLED Mini LED, 144Hz, HDMI 2.1', price: 99990, was: 119990, stock: 'In stock' }
+    ]},
+    phones: { title: 'Gaming smartphones', intro: 'Phones built for sustained play, with high refresh displays, cooling and physical gaming controls.', items: [
+      { brand: 'ASUS ROG', name: 'ROG Phone 9', img: 'images/rog-phone-9.webp', spec: '6.78-inch 165Hz AMOLED, 24GB RAM, AirTriggers', price: 74999, was: 84999, stock: 'In stock' },
+      { brand: 'Nubia RedMagic', name: 'RedMagic 9 Pro', img: 'images/redmagic-9-pro.webp', spec: '6.8-inch 144Hz AMOLED, active cooling fan', price: 56999, was: 64999, stock: 'In stock' },
+      { brand: 'Lenovo Legion', name: 'Legion Y70', img: 'images/legion-y70.webp', spec: '6.67-inch 144Hz AMOLED, 16GB RAM', price: 49999, was: null, stock: 'Few left' }
+    ]},
+    gpus: { title: 'Graphics cards', intro: 'NVIDIA and AMD desktop graphics cards for gaming, streaming and rendering.', items: [
+      { brand: 'NVIDIA GeForce', name: 'RTX 4070', img: 'images/rtx-4070.webp', spec: '12GB GDDR6X, DLSS 3, ray tracing', price: 58990, was: 62990, stock: 'In stock' },
+      { brand: 'NVIDIA GeForce', name: 'RTX 4060 Ti', img: 'images/rtx-4060-ti.webp', spec: '8GB or 16GB GDDR6, DLSS 3', price: 42990, was: null, stock: 'In stock' },
+      { brand: 'AMD Radeon', name: 'RX 7800 XT', img: 'images/rx-7800-xt.webp', spec: '16GB GDDR6, FSR 3', price: 49990, was: 54990, stock: 'Few left' },
+      { brand: 'Intel Arc', name: 'Arc B580', img: 'images/arc-b580.webp', spec: '12GB GDDR6, XeSS, AV1 encoding', price: 24990, was: null, stock: 'In stock' }
+    ]}
+  };
+
+  var fmt = function (n) { return '₹' + n.toLocaleString('en-IN'); };
+  var stars = '<span style="display:inline-flex;gap:1px;color:var(--ink)">' +
+    [1,2,3,4,5].map(function () { return '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg>'; }).join('') + '</span>';
+
+  function card(p, i, key) {
+    var pct = p.was ? Math.round((1 - p.price / p.was) * 100) : 0;
+    var id = key + '-' + i;
+    return '<article class="card">' +
+      '<div class="ph"><span>' + p.brand + ' ' + p.name + '<br>Product photo</span>' +
+        (p.img ? '<img src="' + p.img + '" alt="' + p.brand + ' ' + p.name + '">' : '') +
+        (pct ? '<span class="badge sale">Save ' + pct + '%</span>' : '') +
+      '</div>' +
+      '<span class="brand">' + p.brand + '</span>' +
+      '<h3>' + p.name + '</h3>' +
+      '<p class="spec">' + p.spec + '</p>' +
+      '<div class="price"><span class="now">' + fmt(p.price) + '</span>' + (p.was ? '<span class="was">' + fmt(p.was) + '</span>' : '') + '</div>' +
+      '<span class="stock' + (p.stock === 'Few left' ? ' low' : '') + '">' + p.stock + '</span>' +
+      '<button class="add" type="button" data-add="' + id + '">Add to cart</button>' +
+    '</article>';
+  }
+
+  function fill(el, key, limit) {
+    el.innerHTML = CATS[key].items.slice(0, limit || 999).map(function (p, i) { return card(p, i, key); }).join('');
+  }
+
+  document.querySelectorAll('[data-cat]').forEach(function (el) {
+    fill(el, el.getAttribute('data-cat'), +el.getAttribute('data-limit'));
+  });
+
+  var home = document.getElementById('home');
+  var view = document.getElementById('view');
+
+  function showView(key) {
+    var c = CATS[key];
+    view.innerHTML =
+      '<div class="wrap">' +
+        '<a class="back" href="#top" id="backBtn"><svg class="icon sm"><use href="#i-back"/></svg> Back to store</a>' +
+        '<div class="view-head"><span class="eyebrow">Category</span><h1 class="serif">' + c.title + '</h1><p>' + c.intro + '</p></div>' +
+        '<div class="grid4" id="viewGrid"></div>' +
+        '<p class="note">Prices are indicative and in Indian Rupees. Confirm current price and availability on WhatsApp or by email before ordering.</p>' +
+      '</div>';
+    fill(document.getElementById('viewGrid'), key);
+    home.hidden = true;
+    view.hidden = false;
+    window.scrollTo(0, 0);
+    document.title = c.title + ' | ROG STORE';
+    document.getElementById('backBtn').addEventListener('click', function (e) {
+      e.preventDefault();
+      history.pushState(null, '', '#top');
+      route();
+    });
+  }
+
+  function route() {
+    var h = location.hash;
+    if (h.indexOf('#/') === 0) {
+      var key = h.slice(2);
+      if (CATS[key]) { showView(key); markNav(key); return; }
+    }
+    view.hidden = true;
+    home.hidden = false;
+    document.title = 'ROG STORE | Gaming Laptops, Monitors, TVs, Phones and Graphics Cards';
+    if (h.indexOf('#sec-') === 0) {
+      var el = document.getElementById(h.slice(1));
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      markNav(h.slice(5));
+    } else {
+      window.scrollTo(0, 0);
+      markNav(null);
+    }
+  }
+
+  function markNav(key) {
+    document.querySelectorAll('[data-nav]').forEach(function (a) {
+      a.setAttribute('aria-current', a.getAttribute('data-nav') === key ? 'true' : 'false');
+    });
+  }
+
+  window.addEventListener('hashchange', route);
+  route();
+
+  var header = document.getElementById('header');
+  window.addEventListener('scroll', function () {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  /* Cart is shared with checkout.html through localStorage (same site only). */
+  var STORE_KEY = 'rogStoreCart';
+  function readCart() {
+    try { var v = JSON.parse(localStorage.getItem(STORE_KEY)); return Array.isArray(v) ? v : []; }
+    catch (e) { return []; }
+  }
+  function writeCart(c) {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(c)); } catch (e) { /* storage unavailable */ }
+  }
+  var cartCount = document.getElementById('cartCount');
+  var cartLink = document.querySelector('.cart');
+  function refreshCount() {
+    var n = readCart().reduce(function (sum, i) { return sum + i.qty; }, 0);
+    cartCount.textContent = n;
+    cartLink.setAttribute('aria-label', 'Cart, ' + n + (n === 1 ? ' item' : ' items'));
+  }
+  refreshCount();
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-add]');
+    if (!btn) return;
+    var parts = btn.getAttribute('data-add').split('-');
+    var idx = +parts.pop();
+    var key = parts.join('-');
+    var p = CATS[key].items[idx];
+    var id = key + '-' + idx;
+    var cart = readCart();
+    var line = cart.filter(function (i) { return i.id === id; })[0];
+    if (line) { line.qty += 1; }
+    else { cart.push({ id: id, name: p.brand + ' ' + p.name, price: p.price, qty: 1 }); }
+    writeCart(cart);
+    window.location.href = 'checkout.html';
+  });
+
+  var form = document.getElementById('newsForm');
+  var msg = document.getElementById('newsMsg');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = document.getElementById('email').value.trim();
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+      msg.textContent = 'Thanks. You are subscribed.';
+      form.reset();
+    } else {
+      msg.textContent = 'Please enter a valid email address.';
+    }
+  });
+})();
+</script>
+</body>
+</html>

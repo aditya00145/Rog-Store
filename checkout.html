@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checkout | ROG STORE</title>
+<meta name="description" content="Checkout for ROG STORE. Pay by UPI ID or UPI QR code.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ---------- Tokens (match front page) ---------- */
+:root{
+  --bg:#0E1013; --surface:#17191E; --ink:#EDEDED; --muted:#9AA0A6; --line:#262A31;
+  --accent:#D4A24C; --accent-ink:#0E1013; --alert:#E06C5A; --ph:#1C1F25;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px;
+  --radius:4px;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+[hidden]{display:none!important}
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--s6)}
+.icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.icon.sm{width:18px;height:18px}
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- Header and footer (match front page) ---------- */
+.topbar{background:var(--surface);color:var(--muted);font-size:13px;border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:var(--s4);height:40px;flex-wrap:wrap}
+.topbar a:hover{color:var(--accent)}
+.header{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--line)}
+.header .row{display:flex;align-items:center;gap:var(--s6);height:72px}
+.logo{font-family:var(--serif);font-size:24px;letter-spacing:.02em;white-space:nowrap}
+.logo b{font-weight:500;color:var(--accent)}
+.nav{display:flex;gap:var(--s6);overflow-x:auto;scrollbar-width:none;flex:1;padding:var(--s2) 0}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-size:15px;white-space:nowrap;color:var(--muted);transition:color .2s}
+.nav a:hover{color:var(--ink)}
+.cart{position:relative;display:grid;place-items:center;width:44px;height:44px;flex:none}
+.cart .count{position:absolute;top:2px;right:0;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-size:12px;font-weight:600;display:grid;place-items:center}
+footer{background:var(--surface);border-top:1px solid var(--line);color:var(--muted);padding:var(--s12) 0 var(--s8);font-size:15px;margin-top:var(--s16)}
+.foot{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:var(--s8)}
+.foot .logo{color:var(--ink);font-size:26px}
+.foot h4{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);font-weight:500;margin-bottom:var(--s4)}
+.foot ul{list-style:none;display:grid;gap:var(--s3)}
+.foot a:hover{color:var(--accent)}
+.foot .contact{display:grid;gap:var(--s2);margin-top:var(--s4)}
+.foot .contact span{font-size:13px}
+.foot .contact a{color:var(--ink);font-size:17px;font-weight:500}
+.legal{margin-top:var(--s8);padding-top:var(--s6);border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;font-size:13px}
+
+/* ---------- Page layout ---------- */
+.page-head{padding:var(--s8) 0 var(--s6);border-bottom:1px solid var(--line);margin-bottom:var(--s8)}
+.page-head h1{font-size:clamp(32px,4vw,44px);line-height:1.1;margin-top:var(--s2)}
+.back{display:inline-flex;align-items:center;gap:var(--s2);color:var(--muted);font-size:15px}
+.back:hover{color:var(--accent)}
+.checkout{display:grid;grid-template-columns:1.25fr 1fr;gap:var(--s8);align-items:start;margin-bottom:var(--s12)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:var(--s6)}
+.panel h2{font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:var(--s4)}
+
+/* ---------- Order summary ---------- */
+.items{list-style:none;border-top:1px solid var(--line)}
+.item{display:grid;grid-template-columns:72px 1fr auto;gap:var(--s4);padding:var(--s4) 0;border-bottom:1px solid var(--line);align-items:center}
+.thumb{width:72px;height:72px;background:var(--ph);border:1px solid var(--line);border-radius:2px;display:grid;place-items:center;text-align:center;font-size:11px;color:var(--muted);padding:var(--s1)}
+.item-name{font-weight:600;font-size:15px}
+.item-price{color:var(--muted);font-size:14px}
+.item-controls{display:flex;align-items:center;gap:var(--s3);margin-top:var(--s2);flex-wrap:wrap}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:var(--radius)}
+.qty button{width:34px;height:34px;display:grid;place-items:center;color:var(--ink)}
+.qty button:hover:not(:disabled){color:var(--accent)}
+.qty button:disabled{color:var(--line);cursor:not-allowed}
+.qty output{min-width:28px;text-align:center;font-size:15px}
+.remove{font-size:14px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.remove:hover{color:var(--alert)}
+.line-total{font-weight:600;font-size:15px;text-align:right;white-space:nowrap}
+.empty{padding:var(--s8) 0;color:var(--muted)}
+.totals{margin-top:var(--s6);display:grid;gap:var(--s2);font-size:15px}
+.totals div{display:flex;justify-content:space-between;gap:var(--s4)}
+.totals dt{color:var(--muted)}
+.totals dd{font-variant-numeric:tabular-nums}
+.totals .grand{border-top:1px solid var(--line);padding-top:var(--s3);margin-top:var(--s2);font-size:18px;font-weight:600}
+.totals .grand dd{color:var(--accent)}
+.continue{display:inline-block;margin-top:var(--s6);font-weight:500;border-bottom:1px solid currentColor;padding-bottom:2px}
+.continue:hover{color:var(--accent)}
+
+/* ---------- Payment panel ---------- */
+.tabs{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:var(--s6)}
+.tab{height:44px;font-weight:500;color:var(--muted);border-right:1px solid var(--line)}
+.tab:last-child{border-right:0}
+.tab[aria-selected="true"]{color:var(--ink);background:var(--ph)}
+.tab:hover{color:var(--ink)}
+.amount{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--s4)}
+.amount span{color:var(--muted);font-size:14px}
+.amount strong{font-size:22px;color:var(--accent);font-variant-numeric:tabular-nums}
+.field-label{display:block;font-size:14px;color:var(--muted);margin-bottom:var(--s2)}
+.row-input{display:flex;gap:var(--s2)}
+.input{flex:1;min-width:0;height:48px;border:1px solid var(--line);background:var(--bg);border-radius:var(--radius);padding:0 var(--s4);font-size:16px;outline:none}
+.input:focus{border-color:var(--accent)}
+.input[aria-invalid="true"]{border-color:var(--alert)}
+.btn{height:48px;padding:0 var(--s6);background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);border-radius:var(--radius);font-weight:500;transition:background .2s,border-color .2s;white-space:nowrap}
+.btn:hover:not(:disabled){background:var(--ink);border-color:var(--ink)}
+.btn:disabled{background:var(--line);border-color:var(--line);color:var(--muted);cursor:not-allowed}
+.btn.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.secondary:hover:not(:disabled){border-color:var(--muted);background:transparent;color:var(--ink)}
+.btn.secondary.copied{color:var(--accent);border-color:var(--accent)}
+.qr-box{border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:var(--s4);display:grid;place-items:center;margin-bottom:var(--s3)}
+.qr-box img{width:100%;max-width:240px;height:auto}
+.qr-label{font-size:14px;color:var(--muted);text-align:center}
+.help{font-size:14px;color:var(--muted);margin:var(--s6) 0 var(--s4)}
+.err{color:var(--alert);font-size:14px;margin-top:var(--s2)}
+.success{color:var(--ink);font-size:16px;border:1px solid var(--line);border-radius:var(--radius);padding:var(--s4);margin-top:var(--s4)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .checkout{grid-template-columns:1fr;gap:var(--s6)}
+  .foot{grid-template-columns:1fr 1fr}
+  .foot > div:first-child{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .wrap{padding:0 var(--s4)}
+  .topbar .wrap{justify-content:center;padding:var(--s2) 0;height:auto}
+  .header .row{height:auto;flex-wrap:wrap;gap:var(--s3);padding:var(--s3) 0}
+  .logo{order:1}
+  .cart{order:2;margin-left:auto}
+  .nav{order:4;width:100%;gap:var(--s4);margin:0 calc(var(--s4) * -1);padding:0 var(--s4) var(--s2)}
+  .panel{padding:var(--s4)}
+  .item{grid-template-columns:56px 1fr auto}
+  .thumb{width:56px;height:56px}
+  .row-input{flex-direction:column}
+  .row-input .btn,.row-input .input{width:100%}
+  .foot{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- ===== Header (matches front page) ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <span>Free delivery on orders above ₹999</span>
+    <span>
+      WhatsApp: <a href="https://wa.me/919665687711" target="_blank" rel="noopener">+91 96656 87711</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:kiran.aditya2014@gmail.com">kiran.aditya2014@gmail.com</a>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap row">
+    <a href="index.html#top" class="logo" aria-label="ROG STORE home">ROG <b>STORE</b></a>
+    <nav class="nav" aria-label="Product categories">
+      <a href="index.html#sec-laptops">Gaming laptops</a>
+      <a href="index.html#sec-monitors">Gaming monitors</a>
+      <a href="index.html#sec-tvs">Televisions</a>
+      <a href="index.html#sec-phones">Gaming smartphones</a>
+      <a href="index.html#sec-gpus">Graphics cards</a>
+    </nav>
+    <a href="#summary" class="cart" id="cartLink" aria-label="Cart, 0 items">
+      <svg class="icon" aria-hidden="true"><path d="M3 4h2l2.5 11h11L21 7H6"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
+      <span class="count" id="cartCount">0</span>
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="page-head">
+    <a class="back" href="index.html">
+      <svg class="icon sm" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Continue shopping
+    </a>
+    <h1 class="serif">Checkout</h1>
+  </div>
+
+  <div class="checkout">
+
+    <!-- ===== Order summary (left column) ===== -->
+    <section class="panel" id="summary" aria-labelledby="summaryHead">
+      <h2 id="summaryHead">Order summary</h2>
+      <ul class="items" id="itemList"></ul>
+      <p class="empty" id="emptyMsg" hidden>Your cart is empty. <a class="continue" href="index.html">Browse products</a></p>
+
+      <dl class="totals">
+        <div><dt>Subtotal</dt><dd id="subtotal">₹0</dd></div>
+        <div><dt>Delivery</dt><dd id="delivery">₹0</dd></div>
+        <div><dt>GST included (18%)</dt><dd id="gst">₹0</dd></div>
+        <div class="grand"><dt>Total</dt><dd id="total">₹0</dd></div>
+      </dl>
+      <a class="continue" href="index.html">Continue shopping</a>
+    </section>
+
+    <!-- ===== Payment panel (right column) ===== -->
+    <section class="panel" aria-labelledby="payHead">
+      <h2 id="payHead">Pay with UPI</h2>
+
+      <div class="tabs" role="tablist" aria-label="Payment method">
+        <button class="tab" role="tab" id="tabId" aria-selected="true" aria-controls="panelId" type="button">UPI ID</button>
+        <button class="tab" role="tab" id="tabQr" aria-selected="false" aria-controls="panelQr" tabindex="-1" type="button">UPI QR code</button>
+      </div>
+
+      <div class="amount">
+        <span>Amount to pay</span>
+        <strong data-amount>₹0</strong>
+      </div>
+
+      <!-- UPI ID panel -->
+      <div role="tabpanel" id="panelId" aria-labelledby="tabId">
+        <label class="field-label" for="upiId">Store UPI ID</label>
+        <div class="row-input">
+          <input class="input" id="upiId" type="text" value="[kiran.aditya2014-1@oksbi]" readonly>
+          <button class="btn secondary" id="copyBtn" type="button">Copy</button>
+        </div>
+      </div>
+
+      <!-- UPI QR panel -->
+      <div role="tabpanel" id="panelQr" aria-labelledby="tabQr" hidden>
+        <div class="qr-box">
+          <img src="QR CODE.jpeg" alt="UPI QR code for payment" width="240" height="240">
+        </div>
+        <p class="qr-label">Scan with any UPI app</p>
+      </div>
+
+      <!-- Confirmation -->
+      <p class="help">Pay the exact amount, then enter your UPI transaction ID below.</p>
+      <form id="confirmForm" novalidate>
+        <label class="field-label" for="txnId">UPI transaction ID or reference number</label>
+        <div class="row-input">
+          <input class="input" id="txnId" name="txnId" type="text" autocomplete="off" aria-describedby="txnHelp">
+          <button class="btn" id="confirmBtn" type="submit">Confirm payment</button>
+        </div>
+        <p class="sr-only" id="txnHelp">8 to 25 letters or numbers.</p>
+        <p class="err" id="txnError" role="alert" hidden></p>
+        <p class="success" id="successMsg" role="status" hidden></p>
+      </form>
+    </section>
+
+  </div>
+</main>
+
+<!-- ===== Footer (matches front page) ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="index.html#top" class="logo">ROG <b>STORE</b></a>
+        <div class="contact">
+          <span>Call or message on WhatsApp</span>
+          <a href="https://wa.me/919665687711" target="_blank" rel="noopener">+91 96656 87711</a>
+          <span>Email</span>
+          <a href="mailto:kiran.aditya2014@gmail.com">kiran.aditya2014@gmail.com</a>
+        </div>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="index.html#sec-laptops">Gaming laptops</a></li>
+          <li><a href="index.html#sec-monitors">Gaming monitors</a></li>
+          <li><a href="index.html#sec-tvs">Televisions</a></li>
+          <li><a href="index.html#sec-phones">Gaming smartphones</a></li>
+          <li><a href="index.html#sec-gpus">Graphics cards</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="https://wa.me/919665687711" target="_blank" rel="noopener">WhatsApp support</a></li>
+          <li><a href="mailto:kiran.aditya2014@gmail.com">Email support</a></li>
+          <li><a href="#">Track an order</a></li>
+          <li><a href="#">Warranty claims</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Terms of sale</a></li>
+          <li><a href="#">Shipping policy</a></li>
+          <li><a href="#">Refund policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 ROG STORE. All rights reserved.</span>
+      <span>Prices in Indian Rupees (₹), inclusive of applicable taxes.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ---------- Placeholder settings: replace before launch ---------- */
+  var FREE_DELIVERY_ABOVE = 999;   // placeholder threshold in ₹
+  var DELIVERY_CHARGE = 99;        // placeholder delivery fee in ₹
+  var GST_RATE = 0.18;             // placeholder GST rate; prices are assumed GST-inclusive
+
+  /* ---------- Cart state, shared with the front page through localStorage ---------- */
+  var STORE_KEY = 'rogStoreCart';
+  function loadCart() {
+    try {
+      var v = JSON.parse(localStorage.getItem(STORE_KEY));
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  }
+  function saveCart() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(cart)); } catch (e) { /* storage unavailable */ }
+  }
+  var cart = loadCart();
+
+  var fmt = function (n) { return '₹' + Math.round(n).toLocaleString('en-IN'); };
+
+  function totals() {
+    var subtotal = cart.reduce(function (sum, i) { return sum + i.price * i.qty; }, 0);
+    var delivery = subtotal === 0 || subtotal > FREE_DELIVERY_ABOVE ? 0 : DELIVERY_CHARGE;
+    var gst = subtotal - subtotal / (1 + GST_RATE);   // included in the prices, shown for information
+    return { subtotal: subtotal, delivery: delivery, gst: gst, total: subtotal + delivery };
+  }
+
+  /* ---------- Render: every total and both payment panels update together ---------- */
+  function render() {
+    var list = document.getElementById('itemList');
+    var count = 0;
+    list.innerHTML = cart.map(function (i) {
+      count += i.qty;
+      return '<li class="item">' +
+        '<div class="thumb" aria-hidden="true">Product photo</div>' +
+        '<div>' +
+          '<p class="item-name">' + i.name + '</p>' +
+          '<p class="item-price">' + fmt(i.price) + ' each</p>' +
+          '<div class="item-controls">' +
+            '<div class="qty" role="group" aria-label="Quantity for ' + i.name + '">' +
+              '<button type="button" data-action="dec" data-id="' + i.id + '" aria-label="Decrease quantity"' + (i.qty <= 1 ? ' disabled' : '') + '>-</button>' +
+              '<output aria-live="polite">' + i.qty + '</output>' +
+              '<button type="button" data-action="inc" data-id="' + i.id + '" aria-label="Increase quantity">+</button>' +
+            '</div>' +
+            '<button type="button" class="remove" data-action="remove" data-id="' + i.id + '">Remove</button>' +
+          '</div>' +
+        '</div>' +
+        '<p class="line-total">' + fmt(i.price * i.qty) + '</p>' +
+      '</li>';
+    }).join('');
+
+    var t = totals();
+    document.getElementById('subtotal').textContent = fmt(t.subtotal);
+    document.getElementById('delivery').textContent = t.delivery ? fmt(t.delivery) : 'Free';
+    document.getElementById('gst').textContent = fmt(t.gst);
+    document.getElementById('total').textContent = fmt(t.total);
+    document.querySelectorAll('[data-amount]').forEach(function (el) { el.textContent = fmt(t.total); });
+
+    document.getElementById('emptyMsg').hidden = cart.length > 0;
+    document.getElementById('confirmBtn').disabled = cart.length === 0;
+    document.getElementById('cartCount').textContent = count;
+    document.getElementById('cartLink').setAttribute('aria-label', 'Cart, ' + count + (count === 1 ? ' item' : ' items'));
+  }
+
+  /* ---------- Quantity and remove controls (event delegation) ---------- */
+  document.getElementById('itemList').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    var id = btn.getAttribute('data-id');
+    var item = cart.filter(function (i) { return i.id === id; })[0];
+    if (!item) return;
+    var action = btn.getAttribute('data-action');
+    if (action === 'inc') item.qty += 1;
+    if (action === 'dec' && item.qty > 1) item.qty -= 1;
+    if (action === 'remove') cart = cart.filter(function (i) { return i !== item; });
+    saveCart();
+    render();
+  });
+
+  /* ---------- Payment method tabs (amount stays visible in both) ---------- */
+  var tabs = [document.getElementById('tabId'), document.getElementById('tabQr')];
+  var panels = [document.getElementById('panelId'), document.getElementById('panelQr')];
+  function selectTab(index) {
+    tabs.forEach(function (tab, i) {
+      var on = i === index;
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+      tab.tabIndex = on ? 0 : -1;
+      panels[i].hidden = !on;
+    });
+    tabs[index].focus();
+  }
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () { selectTab(i); });
+    tab.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        selectTab(i === 0 ? 1 : 0);
+      }
+    });
+  });
+
+  /* ---------- Copy UPI ID ---------- */
+  var copyBtn = document.getElementById('copyBtn');
+  var upiInput = document.getElementById('upiId');
+  copyBtn.addEventListener('click', function () {
+    var done = function () {
+      copyBtn.textContent = 'Copied';
+      copyBtn.classList.add('copied');
+      setTimeout(function () {
+        copyBtn.textContent = 'Copy';
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(upiInput.value).then(done, function () { upiInput.select(); });
+    } else {
+      upiInput.select();
+      try { if (document.execCommand('copy')) done(); } catch (err) { /* copy not supported */ }
+    }
+  });
+
+  /* ---------- Confirm payment: format check only ---------- */
+  // NOTE: Real payment verification must be handled on the server or by the UPI provider.
+  // This page only checks that the reference the customer typed has a valid format.
+  var form = document.getElementById('confirmForm');
+  var txn = document.getElementById('txnId');
+  var err = document.getElementById('txnError');
+  var success = document.getElementById('successMsg');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (cart.length === 0) return;
+    var value = txn.value.trim();
+    if (!value) {
+      showError('Enter your UPI transaction ID.');
+      return;
+    }
+    if (!/^[A-Za-z0-9]{8,25}$/.test(value)) {
+      showError('Enter 8 to 25 letters or numbers, with no spaces or symbols.');
+      return;
+    }
+    txn.setAttribute('aria-invalid', 'false');
+    txn.removeAttribute('aria-describedby');
+    err.hidden = true;
+    success.textContent = 'Thank you. We will verify your payment and confirm your order by email.';
+    success.hidden = false;
+    form.querySelector('button').disabled = true;
+    txn.disabled = true;
+  });
+
+  function showError(message) {
+    txn.setAttribute('aria-invalid', 'true');
+    txn.setAttribute('aria-describedby', 'txnError txnHelp');
+    err.textContent = message;
+    err.hidden = false;
+    txn.focus();
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
